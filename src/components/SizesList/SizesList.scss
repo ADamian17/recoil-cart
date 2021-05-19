@@ -1,0 +1,105 @@
+.box-shadow {
+  box-shadow: 0 0 .2rem 0 var(--color-grey-light);
+} 
+
+.sizes {
+  width: 20rem;
+  min-height: 20rem;
+  padding: .5rem;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 3.2rem;
+  grid-auto-rows: 3.2rem;
+
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  // color: var(--color-primary-white);
+  
+
+
+  &__header {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: .5rem;
+  }
+
+  &__item {
+    grid-column: 1 / -1;
+    display: grid;
+    padding: .6rem;
+    grid-template-columns: 2fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+
+    border-radius: .5rem;
+
+    @extend .box-shadow;
+
+    & > :first-child  {
+      justify-self: start;
+    }
+
+    &:not( :last-of-type ) {
+      margin-bottom: .3rem;
+    }
+
+    .remove {
+      cursor: pointer;
+      fill: #494b4b;
+    }
+
+    svg {
+      cursor: pointer;
+    }
+  }
+
+  &__select {
+    margin-top: .3rem;
+    width: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: .5rem;
+    @extend .box-shadow;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+
+  &__qty {
+    display: grid;
+    grid-template-columns: 1fr min-content 1fr;
+    justify-items: center;
+    min-width: 8rem;
+    column-gap: .5rem;
+    align-items: center;
+
+    &--form {
+      width: 3rem;
+
+      input {
+        border: none;
+        width: 100%;
+        text-align: center;
+        transition: all .5s;
+
+
+
+        &:active,
+        &:focus, 
+        &:hover {
+          outline: none;
+          background-color: #d0e1e1;
+          border-radius: .4rem;
+        }
+
+
+      } 
+    }
+  }
+}
