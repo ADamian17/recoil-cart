@@ -53,7 +53,6 @@ const QytComponent = ({ size, availible, setAvailible, inDisplay, setInDisplay }
     }
 
     let qty = prevState[target].qty;
-
     qty--;
 
     const nextState = {
@@ -70,24 +69,28 @@ const QytComponent = ({ size, availible, setAvailible, inDisplay, setInDisplay }
     e.preventDefault()
     if (qty === '') return;
 
-    const prev = { ...cart }
+    const prevState = { ...cart }
     const current = parseInt(qty)
 
-    if (current === prev[size].qty) return;
-
+    if (current === prevState[size].qty) return;
 
     if (current <= 0) {
-      delete prev[size]
-      setCart({ ...prev });
+      delete prevState[size]
+      setCart({ ...prevState });
 
       setInDisplay([...utils.filterArr(inDisplay, size)]);
       return setAvailible([size, ...availible]);
     }
+    const nextState = {
+      ...prevState,
+      [size]: {
+        qty: current
+      },
+    };
 
-    prev[size].qty = current;
     setQty(current);
     e.target.reset()
-    return setCart({ ...prev });
+    return setCart(nextState);
   }
 
 
