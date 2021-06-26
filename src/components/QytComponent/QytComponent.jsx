@@ -22,14 +22,27 @@ const QytComponent = ({ size, availible, setAvailible, inDisplay, setInDisplay }
 
   const increase = (e) => {
     const target = e.currentTarget.dataset.size;
-    const prev = { ...cart };
-    prev[target].qty++
-    setCart({ ...prev })
+
+    const prevState = { ...cart };
+    let qty = prevState[target].qty;
+
+    qty++;
+
+    const nextState = {
+      ...prevState,
+      [size]: {
+        qty
+      },
+    };
+
+    setCart(nextState)
   }
+
 
   const decrease = (e) => {
     const target = e.currentTarget.dataset.size;
     const prev = { ...cart };
+    let next;
     if (prev[target].qty <= 1) {
       delete prev[target]
       setCart({ ...prev })
@@ -38,7 +51,8 @@ const QytComponent = ({ size, availible, setAvailible, inDisplay, setInDisplay }
       return setAvailible([target, ...availible]);
     }
     prev[target].qty--
-    setCart({ ...prev })
+    next = { ...prev }
+    setCart({ ...next })
   }
 
   const handleSubmit = (e) => {
