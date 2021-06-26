@@ -41,18 +41,29 @@ const QytComponent = ({ size, availible, setAvailible, inDisplay, setInDisplay }
 
   const decrease = (e) => {
     const target = e.currentTarget.dataset.size;
-    const prev = { ...cart };
-    let next;
-    if (prev[target].qty <= 1) {
-      delete prev[target]
-      setCart({ ...prev })
+
+    const prevState = { ...cart };
+
+    if (prevState[target].qty <= 1) {
+      delete prevState[target]
+      setCart({ ...prevState })
 
       setInDisplay([...utils.filterArr(inDisplay, target)])
       return setAvailible([target, ...availible]);
     }
-    prev[target].qty--
-    next = { ...prev }
-    setCart({ ...next })
+
+    let qty = prevState[target].qty;
+
+    qty--;
+
+    const nextState = {
+      ...prevState,
+      [size]: {
+        qty
+      },
+    };
+
+    setCart(nextState)
   }
 
   const handleSubmit = (e) => {
